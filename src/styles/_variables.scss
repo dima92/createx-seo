@@ -1,0 +1,33 @@
+@use "helpers/functions" as *;
+
+// Сетка
+$container-width: 1230;
+$container-padding-x: 15;
+
+// Анимации
+$transition-duration: 0.3s;
+$transition-base: all $transition-duration ease-in-out;
+
+// Шрифты
+$font-family: "Lato", sans-serif;
+
+// ==========================================================================
+// ЦВЕТОВАЯ ПАЛИТРА (UI-KIT) — ПРОЕКТ CREATEX SEO
+// ==========================================================================
+
+$white-color: #fff;
+$primary-color: #7772f1;
+$secondary-color: #00f0b5;
+$success-color: #03cea4;
+$danger-color: #ff4242;
+$warning-color: #f89828;
+$info-color: #5a87fc;
+$gray-900-color: #1e212c;
+$gray-800-color: #424551;
+$gray-700-color: #787a80;
+$gray-600-color: #9a9ca5;
+$gray-500-color: #b3b7bc;
+$gray-400-color: #d7dadd;
+$gray-300-color: #e5e8ed;
+$gray-200-color: #f4f5f6;
+$gray-100-color: #f9f9f9;

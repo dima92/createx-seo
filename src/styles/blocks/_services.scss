@@ -1,0 +1,191 @@
+@use "sass:color";
+@use "../helpers" as *;
+@use "../variables" as *;
+
+.services {
+  background-color: $white-color;
+  padding-block: to-rem(120);
+  width: 100%;
+
+  @include respond-to("tablet") {
+    padding-block: to-rem(60);
+  }
+
+  &__title {
+    @include fluid-text($max: 46, $min: 28);
+    font-weight: 900;
+    color: $gray-900-color;
+    line-height: 1.3;
+    text-align: center;
+    margin-bottom: to-rem(40);
+  }
+
+  &__tabs {
+    @include flex(row, center, center, 40, $wrap: wrap);
+    margin-bottom: to-rem(60);
+
+    @include respond-to("tablet") {
+      gap: to-rem(20);
+      margin-bottom: to-rem(40);
+    }
+  }
+
+  &__tab-btn {
+    font-size: to-rem(16);
+    font-weight: 700;
+    line-height: 1.6;
+    color: $gray-600-color;
+    padding: to-rem(8) to-rem(16);
+    border-radius: to-rem(4);
+    position: relative;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: color $transition-duration ease-in-out;
+  }
+
+  &__content-wrapper {
+    width: 100%;
+  }
+
+  &__tab-content {
+    display: none;
+
+    &.is-active {
+      @include grid($cols: 1fr 1.2fr, $gap: 80);
+      align-items: center;
+    }
+
+    @include respond-to("tablet") {
+      &.is-active {
+        grid-template-columns: 1fr;
+        gap: to-rem(40);
+      }
+    }
+  }
+
+  &__info {
+    @include flex(column, flex-start, flex-start);
+
+    @include respond-to("tablet") {
+      align-items: center;
+      text-align: center;
+    }
+  }
+
+  &__subtitle {
+    @include fluid-text($max: 28, $min: 24);
+    font-weight: 700;
+    color: $gray-900-color;
+    line-height: 1.5;
+    margin-bottom: to-rem(24);
+  }
+
+  &__list {
+    @include flex(column, flex-start, flex-start, 12);
+    margin-bottom: to-rem(48);
+  }
+
+  &__item {
+    font-size: to-rem(16);
+    font-weight: 400;
+    line-height: 1.6;
+    color: $gray-800-color;
+    position: relative;
+    padding-left: to-rem(32);
+    text-align: left;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: to-rem(4);
+      width: to-rem(16);
+      height: to-rem(16);
+      background-image: url("../../assets/icons/check-mark.svg");
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+  }
+
+  &__actions {
+    @include flex(row, flex-start, center, 24, $wrap: wrap);
+
+    @include respond-to("tablet") {
+      justify-content: center;
+    }
+  }
+
+  &__btn-primary {
+    @include flex(row, center, center, $isInline: true);
+    height: to-rem(44);
+    padding-inline: to-rem(32);
+    background-color: $primary-color;
+    color: $white-color;
+    font-weight: 700;
+    font-size: to-rem(14);
+    line-height: 3.14;
+    letter-spacing: 0.04em;
+    border-radius: to-rem(4);
+    white-space: nowrap;
+
+    @include hover {
+      background-color: color.adjust($primary-color, $lightness: 7%);
+      transform: translateY(-2px);
+    }
+  }
+
+  &__btn-outline {
+    @include flex(row, center, center, $isInline: true);
+    height: to-rem(44);
+    padding-inline: to-rem(32);
+    background: transparent;
+    color: $primary-color;
+    font-weight: 700;
+    font-size: to-rem(14);
+    line-height: 3.14;
+    letter-spacing: 0.04em;
+    border: 1px solid $primary-color;
+    border-radius: to-rem(4);
+    white-space: nowrap;
+
+    @include hover {
+      background-color: $primary-color;
+      color: $white-color;
+      transform: translateY(-2px);
+    }
+  }
+
+  &__visual {
+    position: relative;
+    width: 100%;
+    max-width: to-rem(712);
+    justify-self: end;
+
+    @include respond-to("tablet") {
+      justify-self: center;
+      max-width: to-rem(450);
+    }
+  }
+
+  &__bg-shape {
+    position: absolute;
+    top: 10%;
+    left: -5%;
+    width: 110%;
+    height: 90%;
+    background-image: url("../../assets/icons/services-bg-shape.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  &__img {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+}

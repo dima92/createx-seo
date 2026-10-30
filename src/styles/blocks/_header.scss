@@ -1,0 +1,239 @@
+@use "sass:color";
+@use "../helpers" as *;
+@use "../variables" as *;
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  padding-block: to-rem(20);
+
+  @include respond-to("tablet") {
+    padding-block: to-rem(15);
+  }
+
+  &__container {
+    @include flex(row, flex-start, center);
+    position: relative;
+  }
+
+  &__logo {
+    flex-shrink: 0;
+
+    @include hover {
+      opacity: 0.8;
+    }
+  }
+
+  &__nav {
+    margin-left: to-rem(60);
+
+    @include respond-to("tablet") {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      max-width: to-rem(320);
+      height: 100vh;
+      background-color: $gray-900-color;
+      padding: to-rem(100) to-rem(30) to-rem(40);
+      z-index: 99;
+      margin-left: 0;
+      overflow-y: auto;
+      transform: translateX(100%);
+      transition: transform $transition-duration ease-in-out;
+
+      &.is-open {
+        transform: translateX(0);
+      }
+    }
+  }
+
+  &__list {
+    @include flex(row, space-between, center, 40);
+
+    @include respond-to("tablet") {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: to-rem(24);
+    }
+  }
+
+  &__item {
+    position: relative;
+
+    @media (min-width: 993px) {
+      @include hover(false) {
+        .header__dropdown {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0);
+        }
+
+        .header__link svg {
+          transform: translateY(-50%) rotate(180deg);
+        }
+      }
+    }
+  }
+
+  &__link {
+    line-height: 1.6;
+    opacity: 0.6;
+    position: relative;
+    padding-right: to-rem(20);
+
+    svg {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.6;
+      transition: transform $transition-duration ease-in-out;
+
+      path {
+        fill: currentColor;
+      }
+    }
+
+    &.is-active svg {
+      @include respond-to("tablet") {
+        transform: translateY(-50%) rotate(180deg);
+      }
+    }
+
+    @include hover {
+      opacity: 1;
+      color: $secondary-color;
+    }
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: 100%;
+    left: to-rem(-20);
+    z-index: 10;
+    min-width: to-rem(240);
+    padding: to-rem(16) to-rem(20);
+    background-color: $gray-900-color;
+    border: 1px solid rgba($white-color, 0.1);
+    border-radius: to-rem(4);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition:
+      opacity $transition-duration ease-in-out,
+      visibility $transition-duration ease-in-out,
+      transform $transition-duration ease-in-out;
+
+    li:not(:last-child) {
+      margin-bottom: to-rem(12);
+    }
+
+    @include respond-to("tablet") {
+      position: static;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      box-shadow: none;
+      border: none;
+      padding: 0;
+      margin-top: to-rem(12);
+      margin-left: to-rem(15);
+      display: none;
+      min-width: 100%;
+
+      &.is-active {
+        display: block;
+      }
+    }
+  }
+
+  &__dropdown-link {
+    color: rgba($white-color, 0.6);
+    font-size: to-rem(14);
+    font-weight: 400;
+    white-space: nowrap;
+    transition: color $transition-duration ease-in-out;
+
+    @include hover {
+      color: $secondary-color;
+    }
+  }
+
+  &__btn {
+    @include flex(row, center, center, $isInline: true);
+    margin-left: auto;
+    padding-inline: to-rem(40);
+    height: to-rem(52);
+    background-color: $primary-color;
+    line-height: 3.25;
+    letter-spacing: 0.03em;
+    border-radius: to-rem(4);
+    white-space: nowrap;
+
+    @include respond-to("tablet") {
+      margin-right: to-rem(50);
+    }
+
+    @include respond-to("mobile") {
+      padding-inline: to-rem(20);
+      height: to-rem(44);
+    }
+
+    @include hover {
+      background-color: color.adjust($primary-color, $lightness: 7%);
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  &__burger {
+    display: none;
+
+    @include respond-to("tablet") {
+      @include flex(column, space-between, center);
+      position: absolute;
+      right: to-rem(15);
+      top: 50%;
+      transform: translateY(-50%);
+      width: to-rem(28);
+      height: to-rem(20);
+      background: transparent;
+      border: none;
+      z-index: 100;
+      cursor: pointer;
+
+      span {
+        display: block;
+        width: 100%;
+        height: to-rem(2);
+        background-color: $white-color;
+        transition:
+          transform $transition-duration ease-in-out,
+          opacity $transition-duration ease-in-out,
+          width $transition-duration ease-in-out;
+        transform-origin: center;
+      }
+
+      &.is-open {
+        span:nth-child(1) {
+          transform: translateY(to-rem(9)) rotate(45deg);
+        }
+        span:nth-child(2) {
+          opacity: 0;
+          transform: scaleX(0);
+        }
+        span:nth-child(3) {
+          transform: translateY(to-rem(-9)) rotate(-45deg);
+        }
+      }
+    }
+  }
+}

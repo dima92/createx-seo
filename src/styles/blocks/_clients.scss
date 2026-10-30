@@ -1,0 +1,55 @@
+@use "../helpers" as *;
+@use "../variables" as *;
+
+.clients {
+  background-color: $white-color;
+  padding-bottom: to-rem(100);
+  width: 100%;
+
+  @include respond-to("tablet") {
+    padding-bottom: to-rem(50);
+  }
+
+  &__container {
+    @include flex(row, space-between, center, $wrap: wrap);
+
+    padding-top: to-rem(60);
+
+    @include respond-to("tablet") {
+      justify-content: center;
+      gap: to-rem(40);
+      padding-top: to-rem(40);
+    }
+  }
+
+  &__item {
+    @include flex(row, center, center);
+
+    @include respond-to("tablet") {
+      flex: 1 1 calc(33.333% - to-rem(40));
+      max-width: to-rem(180);
+    }
+
+    @include respond-to("mobile") {
+      flex: 1 1 calc(50% - to-rem(40));
+    }
+  }
+
+  &__img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+
+    opacity: 0.4;
+    filter: grayscale(100%);
+
+    transition:
+      opacity $transition-duration ease-in-out,
+      filter $transition-duration ease-in-out;
+
+    @include hover {
+      opacity: 1;
+      filter: grayscale(0%);
+    }
+  }
+}

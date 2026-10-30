@@ -1,0 +1,240 @@
+@use "sass:color";
+@use "../helpers" as *;
+@use "../variables" as *;
+
+.footer {
+  background-color: $gray-900-color;
+  width: 100%;
+  color: $white-color;
+
+  &__main {
+    @include grid($cols: 2.5fr 1fr 1fr 1.2fr 2.5fr, $gap: 40);
+    padding-top: to-rem(80);
+    padding-bottom: to-rem(60);
+    border-bottom: 1px solid rgba($white-color, 0.1);
+
+    @include respond-to("desktop-sm") {
+      grid-template-columns: repeat(3, 1fr);
+      gap: to-rem(30);
+    }
+
+    @include respond-to("tablet") {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond-to("mobile") {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+  }
+
+  &__column {
+    @include flex(column, flex-start, flex-start, 0);
+
+    &--info {
+      max-width: to-rem(280);
+      @include respond-to("mobile") {
+        max-width: 100%;
+        align-items: center;
+      }
+    }
+
+    &--form {
+      @include respond-to("mobile") {
+        align-items: center;
+      }
+    }
+
+    @include respond-to("mobile") {
+      align-items: center;
+    }
+  }
+
+  &__logo {
+    margin-bottom: to-rem(24);
+    display: inline-block;
+  }
+
+  &__description {
+    font-size: to-rem(12);
+    font-weight: 400;
+    line-height: 1.5;
+    color: rgba($white-color, 0.6);
+    margin-bottom: to-rem(24);
+  }
+
+  &__socials {
+    @include flex(row, flex-start, center, 16);
+  }
+
+  &__social-link {
+    font-size: to-rem(16);
+    color: rgba($white-color, 0.6);
+    transition: color $transition-duration ease-in-out;
+
+    @include hover {
+      color: $secondary-color;
+    }
+  }
+
+  &__title {
+    font-size: to-rem(16);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: to-rem(24);
+  }
+
+  &__list {
+    @include flex(column, flex-start, flex-start, 12);
+
+    @include respond-to("mobile") {
+      align-items: center;
+    }
+  }
+
+  &__link {
+    font-size: to-rem(16);
+    font-weight: 400;
+    color: rgba($white-color, 0.6);
+    transition: color $transition-duration ease-in-out;
+
+    @include hover {
+      color: $white-color;
+    }
+  }
+
+  &__form {
+    display: flex;
+    width: 100%;
+    position: relative;
+    margin-bottom: to-rem(12);
+    max-width: to-rem(300);
+  }
+
+  &__input {
+    width: 100%;
+    height: to-rem(44);
+    padding-left: to-rem(16);
+    padding-right: to-rem(44);
+    background-color: rgba($white-color, 0.08);
+    border: 1px solid rgba($white-color, 0.2);
+    border-radius: to-rem(4);
+    color: $white-color;
+    font-size: to-rem(14);
+    transition: border-color $transition-duration ease-in-out;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+    }
+  }
+
+  &__submit-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: to-rem(44);
+    @include flex(row, center, center);
+    background: transparent;
+    border: none;
+    color: rgba($white-color, 0.6);
+    font-size: to-rem(18);
+    cursor: pointer;
+    transition: color $transition-duration ease-in-out;
+
+    @include hover {
+      color: $white-color;
+    }
+  }
+
+  &__note {
+    font-size: to-rem(10);
+    line-height: 1.4;
+    color: rgba($white-color, 0.4);
+    max-width: to-rem(280);
+  }
+
+  &__middle {
+    @include flex(row, space-between, center);
+    padding-block: to-rem(40);
+    border-bottom: 1px solid rgba($white-color, 0.1);
+
+    @include respond-to("tablet") {
+      flex-direction: column;
+      gap: to-rem(30);
+    }
+  }
+
+  &__partners {
+    @include flex(row, flex-start, center, 40, $wrap: wrap);
+
+    img {
+      max-height: to-rem(32);
+      opacity: 0.5;
+      object-fit: contain;
+    }
+
+    @include respond-to("tablet") {
+      justify-content: center;
+      gap: to-rem(24);
+    }
+  }
+
+  &__to-top-btn {
+    @include flex(row, flex-end, center, 16);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: $white-color;
+  }
+
+  &__to-top-text {
+    font-size: to-rem(14);
+    font-weight: 700;
+    text-transform: uppercase;
+    opacity: 0.6;
+    transition: opacity $transition-duration ease-in-out;
+  }
+
+  &__to-top-icon {
+    @include flex(row, center, center);
+    width: to-rem(40);
+    height: to-rem(40);
+    border-radius: to-rem(4);
+    background-color: $primary-color;
+    font-size: to-rem(18);
+    font-weight: 700;
+    transition: background-color $transition-duration ease-in-out;
+  }
+
+  &__to-top-btn:hover {
+    .footer__to-top-text {
+      opacity: 1;
+    }
+    .footer__to-top-icon {
+      background-color: color.adjust($primary-color, $lightness: 7%);
+    }
+  }
+
+  &__bottom {
+    background-color: #151720;
+    padding-block: to-rem(24);
+  }
+
+  &__copyright {
+    font-size: to-rem(12);
+    font-weight: 400;
+    color: rgba($white-color, 0.5);
+    margin: 0;
+
+    span {
+      color: $primary-color;
+    }
+
+    @include respond-to("mobile") {
+      text-align: center;
+    }
+  }
+}

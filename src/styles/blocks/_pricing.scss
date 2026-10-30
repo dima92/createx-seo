@@ -1,0 +1,246 @@
+@use "sass:color";
+@use "../helpers" as *;
+@use "../variables" as *;
+
+.pricing {
+  background-color: $white-color;
+  padding-block: to-rem(120);
+  width: 100%;
+
+  @include respond-to("tablet") {
+    padding-block: to-rem(60);
+  }
+
+  &__title {
+    @include fluid-text($max: 46, $min: 28);
+    font-weight: 900;
+    line-height: 1.3;
+    color: $gray-900-color;
+    text-align: center;
+    margin-bottom: to-rem(60);
+  }
+
+  &__toggle-wrapper {
+    @include flex(row, center, center);
+    margin-bottom: to-rem(60);
+  }
+
+  &__toggle {
+    @include flex(row, center, center);
+    border: 1px solid var(--primary);
+    border-radius: 0 40px 40px 0;
+    padding: to-rem(10) to-rem(20);
+    background-color: $white-color;
+  }
+
+  &__toggle-btn {
+    font-size: to-rem(16);
+    font-weight: 700;
+    padding: to-rem(10) to-rem(20);
+    border-radius: to-rem(24);
+    border: none;
+    background: transparent;
+    color: $gray-700-color;
+    transition:
+      background-color $transition-duration ease-in-out,
+      color $transition-duration ease-in-out;
+
+    &.is-active {
+      background-color: $primary-color;
+      color: $white-color;
+    }
+  }
+
+  &__toggle-badge {
+    font-size: to-rem(12);
+    font-weight: 400;
+    line-height: 1.5;
+    margin-left: to-rem(8);
+    color: $primary-color;
+  }
+
+  &__grid {
+    @include grid($cols: 3, $gap: 30);
+    align-items: stretch;
+    max-width: to-rem(1230);
+    height: to-rem(536);
+    margin-inline: auto;
+
+    @include respond-to("tablet") {
+      grid-template-columns: 1fr;
+      height: auto;
+      gap: to-rem(30);
+    }
+  }
+}
+
+.price-card {
+  background-color: $white-color;
+  border: 1px solid rgba(119, 114, 241, 0.4);
+  border-radius: to-rem(4);
+  padding: to-rem(40);
+  box-shadow:
+    0 4px 4px -4px rgba(30, 33, 44, 0.03),
+    0 12px 10px -6px rgba(154, 156, 165, 0.04),
+    0 30px 24px -10px rgba(154, 156, 165, 0.05),
+    0 80px 80px -20px rgba(154, 156, 165, 0.08);
+  @include flex(column, flex-start, stretch);
+  height: 100%;
+  transition:
+    transform $transition-duration ease-in-out,
+    box-shadow $transition-duration ease-in-out;
+
+  @include hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(30, 33, 44, 0.1);
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: to-rem(32);
+    border-bottom: 1px solid $gray-300-color;
+    padding-bottom: to-rem(24);
+  }
+
+  &__name {
+    font-size: to-rem(28);
+    font-weight: 700;
+    color: $gray-900-color;
+    line-height: 1.5;
+    margin-bottom: to-rem(8);
+  }
+
+  &__price {
+    @include flex(row, center, flex-end);
+  }
+
+  &__currency {
+    font-size: to-rem(46);
+    font-weight: 900;
+    color: $primary-color;
+    line-height: 1.3;
+  }
+
+  &__period {
+    font-size: to-rem(20);
+    color: $gray-700-color;
+    margin-left: to-rem(8);
+    margin-bottom: to-rem(6);
+  }
+
+  &__list {
+    @include flex(column, flex-start, stretch, 12);
+    margin-bottom: to-rem(40);
+    flex-grow: 1;
+  }
+
+  &__item {
+    font-size: to-rem(16);
+    font-weight: 400;
+    position: relative;
+    padding-left: to-rem(28);
+    text-align: left;
+    line-height: 1.6;
+
+    &--check {
+      color: $gray-800-color;
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: to-rem(2);
+        width: to-rem(16);
+        height: to-rem(16);
+        background-image: url("../../assets/icons/check.svg");
+        background-repeat: no-repeat;
+        background-size: contain;
+      }
+    }
+
+    &--cross {
+      color: $gray-500-color;
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: to-rem(2);
+        width: to-rem(16);
+        height: to-rem(16);
+        background-image: url("/src/assets/icons/cross.svg");
+        background-repeat: no-repeat;
+        background-size: contain;
+      }
+    }
+  }
+
+  &__footer {
+    width: 100%;
+  }
+
+  &__btn {
+    @include flex(row, center, center);
+    width: 100%;
+    height: to-rem(44);
+    border: 1px solid $primary-color;
+    border-radius: to-rem(4);
+    color: $primary-color;
+    font-weight: 700;
+    font-size: to-rem(14);
+    transition:
+      background-color $transition-duration ease-in-out,
+      color $transition-duration ease-in-out;
+
+    @include hover {
+      background-color: $primary-color;
+      color: $white-color;
+    }
+
+    &--filled {
+      background-color: $primary-color;
+      color: $white-color;
+
+      @include hover {
+        background-color: color.adjust($primary-color, $lightness: 7%);
+        border-color: transparent;
+      }
+    }
+  }
+
+  &--dark {
+    background-color: $gray-900-color;
+    border: 1px solid $success-color;
+    box-shadow:
+      0 4px 4px -4px rgba(30, 33, 44, 0.05),
+      0 12px 10px -6px rgba(30, 33, 44, 0.08),
+      0 26px 24px -10px rgba(30, 33, 44, 0.1),
+      0 60px 80px -20px rgba(30, 33, 44, 0.16);
+
+    .price-card__name,
+    .price-card__period {
+      color: $white-color;
+    }
+
+    .price-card__currency,
+    .price-card__period {
+      color: $success-color;
+    }
+
+    .price-card__header {
+      border-bottom-color: rgba($white-color, 0.1);
+    }
+
+    .price-card__item--check {
+      color: $white-color;
+      &::before {
+        background-image: url("/src/assets/icons/check-green.svg");
+      }
+    }
+
+    .price-card__item--cross {
+      color: $white-color;
+      &::before {
+        background-image: url("/src/assets/icons/cross.svg");
+      }
+    }
+  }
+}
